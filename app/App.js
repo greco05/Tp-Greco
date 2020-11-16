@@ -13,7 +13,7 @@ class App {
           })
 
         //chargement de la page
-        document.ready(() => {
+        $(document).ready(() => {
             App.browse();
         })
     }
