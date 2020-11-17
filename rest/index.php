@@ -1,49 +1,62 @@
 <?php
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/rest/Db.php';
+
 switch ($_SERVER["REQUEST_METHOD"]) {
-    case 'GET': // table, id, where, ord
+    case 'GET':
         $_get = validate_request($_GET);
         $table = isset($_get['table']) ? $_get['table'] : null;
+        //obligatoire
+        if($table == null){
+            echo json_encode(false);
+            break;
+        }
         $id = isset($_get['id']) ? $_get['id'] : null;
         $where = isset($_get['where']) ? $_get['where'] : null;
-        $ordered = isset($_get['order']) ? $_get['order'] : null;
-        if($table == null){
-         echo json_encode(false);
-        }
-        echo json_encode($_get);
-    break;
-
-    case 'POST': // table, fields 
+        $orderby = isset($_get['orderby']) ? $_get['orderby'] : null;
+        //echo json_encode($_get);
+        echo Db::select($table, $id, $where, $orderby);
+        break;
+    case 'POST':
         $_post = validate_request($_POST);
         $table = isset($_post['table']) ? $_post['table'] : null;
-        $fields = isset($_post['fields']) ? $post['fields'] : null;
+        //obligatoire
         if($table == null){
-         echo json_encode(false);   
+            echo json_encode(false);
+            break;
         }
-        echo json_encode($_post);
-    break;
-
-    case 'UPDATE': // table, id, fields
+        $fields = isset($_post['fields']) ? $_post['fields'] : null;
+        //echo json_encode($_post);
+        echo Db::insert($table, $fields);
+        break;
+    case 'PUT':
         $_put = json_decode(file_get_contents('php://input'), true);
+        $_put = validate_request($_put);
         $table = isset($_put['table']) ? $_put['table'] : null;
         $id = isset($_put['id']) ? $_put['id'] : null;
-        $fields = isset($_post['fields']) ? $post['fields'] : null;
+        //obligatoires
         if($table == null || $id == null){
-         echo json_encode(false);
+            echo json_encode(false);
+            break;
         }
-        echo json_encode($_put);
-    break;
-
-    case 'DELETE': // table, id
+        $fields = isset($_put['fields']) ? $_put['fields'] : null;
+        //echo json_encode($_put);
+        echo Db::update($table, $id, $fields);
+        break;
+    case 'DELETE':
         $_del = json_decode(file_get_contents('php://input'), true);
+        $_del = validate_request($_del);
         $table = isset($_del['table']) ? $_del['table'] : null;
         $id = isset($_del['id']) ? $_del['id'] : null;
+        //obligatoires
         if($table == null || $id == null){
-         echo json_encode(false); 
+            echo json_encode(false);
+            break;
         }
-        echo json_encode($_del);
-    break;
-
-    }
+        //echo json_encode($_del);
+        echo Db::delete($table, $id);
+        break;
+}
 
 function validate_request($request)
 {
@@ -57,3 +70,5 @@ function validate_request($request)
     }
     return $request;
 }
+
+
