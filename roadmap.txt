@@ -1,14 +1,12 @@
-Step 1 :
-0. Nouvelle branche git Step 1 
-1. Mettre en place la base de données
-Création de la base
-Création des tables
-Insertion de données pour les tests : tables product et category dans un premier temps
-https://mockaroo.com/ pour générer les données des autres tables (user, command et command_line)
-2. Créer une classe Rest.js pour l'envoi des requettes Ajax vers l'Api Rest
-3. Créer le fichier index.php de l'Api Rest qui recéptionnera les requêtes Ajax
-Dans un premier temps le fichier index.php renvoi ce qu'il a reçu (ou false si info indispensable manquante)
-4. Tester les nouvelles fonctionnalités
-Attention aux infos indispensables pour les requêtes sur la DB !
-5. git Commit Step 1 + Merge sur master
-6. Nouvelle Branche git Step 2
+Step 2 :
+1. Créer la classe Db.php qui va permetrre d'effectuer les requêtes SQL
+Fonction Connection
+Fonction Query générique
+Fonction Select
+Fonction Insert
+Fonction Update
+Fonction Delete
+2. Tester les nouvelles fonctionnalités avec les fonctions de la classe Rest.js
+
+3. git Commit Step 2 + Merge sur master
+4. Nouvelle Branche git Step 3 pour la prochaine étape
