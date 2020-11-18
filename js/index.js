@@ -11,27 +11,31 @@
 //     $('#main').hide().html(resp).fadeIn();
 // })
 
-// Rest.post({
-//     table: "product",
-//     fields: {
-//         title: "titre du produit",
-//         active: 1,
-//         onsale: 0
-//     }
-// }).done((resp) => {
-//     $('#main').hide().html(resp).fadeIn();
-// })
-
-Rest.put({
+Rest.post({
     table: "product",
-    id: 5,
     fields: {
-        //id : 2,
-        title: "nouveau titre 2"         
+        active: 1,       
+        // category_id:1,
+        title: "titre du produit",
+        description: "",
+        // price:10.10,
+        // onsale: 0,
+        // ord:5,
     }
 }).done((resp) => {
     $('#main').hide().html(resp).fadeIn();
 })
+
+// Rest.put({
+//     table: "product",
+//     id: 5,
+//     fields: {
+//         //id : 2,
+//         title: "nouveau titre 2"         
+//     }
+// }).done((resp) => {
+//     $('#main').hide().html(resp).fadeIn();
+// })
 
 // Rest.delete({
 //     table: "product",

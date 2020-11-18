@@ -71,7 +71,7 @@ class Db
 
     }
 
-    public static function insert($table, $fields)
+    public static function insert($table, $fields = null)
     {
         $colums = "";
         $cond = "";
