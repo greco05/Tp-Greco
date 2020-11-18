@@ -12,10 +12,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             break;
         }
         $id = isset($_get['id']) ? $_get['id'] : null;
-        $where = isset($_get['where']) ? $_get['where'] : null;
+        $active = isset($_get['active']) ? $_get['active'] : null;
         $orderby = isset($_get['orderby']) ? $_get['orderby'] : null;
         //echo json_encode($_get);
-        echo Db::select($table, $id, $where, $orderby);
+        echo Db::select($table, $id, $active, $orderby);
         break;
     case 'POST':
         $_post = validate_request($_POST);
