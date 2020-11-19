@@ -44,8 +44,7 @@
 //     $('#main').hide().html(resp).fadeIn();
 // })
 
-
-
+Utils.init()
 //Test convertion en json
 Rest.get({
     table: "product",
@@ -53,8 +52,8 @@ Rest.get({
     active: 1, 
     orderby: "title ASC"
 }).done((resp) => {
-    let test = tryJsonParse(resp)
-    console.log(test)
+    let objJ = resp.tryJsonParse();
+    console.log(objJ);
     $('#main').hide().html(resp).fadeIn();
 })
 

@@ -2,7 +2,7 @@ class Product {
 
     constructor(obj) {
         for(let k in obj){
-            if (this[k] == "active" || this[k] == "onsale" || typeof this[k] == "boolean"){
+            if (typeof this[k] == "boolean"){ //this[k] == "active" || this[k] == "onsale" || 
                 this[k] = obj[k] == "1" ? true : false;
             }
             else if (typeof this[k] == "number"){
