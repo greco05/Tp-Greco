@@ -11,20 +11,20 @@
 //     $('#main').hide().html(resp).fadeIn();
 // })
 
-Rest.post({
-    table: "product",
-    fields: {
-        active: 1,       
-        // category_id:1,
-        title: "titre du produit",
-        description: "",
-        // price:10.10,
-        // onsale: 0,
-        // ord:5,
-    }
-}).done((resp) => {
-    $('#main').hide().html(resp).fadeIn();
-})
+// Rest.post({
+//     table: "product",
+//     fields: {
+//         active: 1,       
+//         // category_id:1,
+//         title: "titre du produit",
+//         description: "",
+//         // price:10.10,
+//         // onsale: 0,
+//         // ord:5,
+//     }
+// }).done((resp) => {
+//     $('#main').hide().html(resp).fadeIn();
+// })
 
 // Rest.put({
 //     table: "product",
@@ -43,3 +43,18 @@ Rest.post({
 // }).done((resp) => {
 //     $('#main').hide().html(resp).fadeIn();
 // })
+
+
+
+//Test convertion en json
+Rest.get({
+    table: "product",
+    id: 6,
+    active: 1, 
+    orderby: "title ASC"
+}).done((resp) => {
+    let test = tryJsonParse(resp)
+    console.log(test)
+    $('#main').hide().html(resp).fadeIn();
+})
+
