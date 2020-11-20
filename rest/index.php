@@ -12,13 +12,15 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             break;
         }
         $id = isset($_get['id']) ? $_get['id'] : null;
-        $active = isset($_get['active']) ? $_get['active'] : null;
+        $where = isset($_get['where']) ? $_get['where'] : null;
         $orderby = isset($_get['orderby']) ? $_get['orderby'] : null;
         //echo json_encode($_get);
-        echo Db::select($table, $id, $active, $orderby);
+        echo Db::select($table, $id, $where, $orderby);
         break;
     case 'POST':
-        $_post = validate_request($_POST);
+        //$_post = validate_request($_POST);
+        $_post = json_decode(file_get_contents('php://input'), true);
+        $_post = validate_request($_post);
         $table = isset($_post['table']) ? $_post['table'] : null;
         //obligatoire
         if($table == null){

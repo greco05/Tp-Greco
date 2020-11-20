@@ -1,13 +1,15 @@
-Step 3 :
+Step 4 :
 
-0. Extension TODO Tree bien pratique !
-Lors d'un update (put) avec aucune valeur modifiée dans la ligne, l'Api Rest renvoi false (à traiter ultérieurement en JS)
+1. Créer une fonction App.test() qui va nous servir à tester notre code au fur et à mesure
 
-1. Création de la classe Utils qui va nous permettre de stocker des fonctions outils 
-String > tryJsonParse() pour convertir les reponses serveur en objet json
+2. Ajouter la classe Category (même principe que Product)
+2bis. Tester la création d'objets Product et Category en js à partir de requêtes sur la DB (Rest)
 
-2. Création d'une classe Product et convertion json en js Product
-Attention au type des données récupérées (string/number/bool)
+3. Créer la classe Model qui sera la classe mère de toutes les autres classes du répertoire model
+4. Modifier les classes Product et Category (extends Model)
+4bis. Tester la création d'objets Product et Category en js à partir de requêtes sur la DB (Rest)
 
-3. git Commit Step 3 + Merge sur master
-4. Nouvelle Branche git Step 4 pour la prochaine étape
+5. Créer une fonction App.loadClasses qui charge les classes (afin d'éviter de rajouter une multitude de balises script dans index.html)
+
+6. git Commit Step 4 + Merge sur master
+7. Nouvelle Branche git Step 5 pour la prochaine étape
