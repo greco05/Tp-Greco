@@ -50,10 +50,14 @@ Rest.get({
     table: "product",
     id: 6,
     active: 1, 
-    orderby: "title ASC"
+    // orderby: "title ASC"
 }).done((resp) => {
     let objJ = resp.tryJsonParse();
     console.log(objJ);
+    for(let k of objJ){
+        let listProd = new Product(k);
+        console.log(listProd)
+    }
     $('#main').hide().html(resp).fadeIn();
 })
 

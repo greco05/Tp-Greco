@@ -2,10 +2,10 @@ class Product {
 
     constructor(obj) {
         for(let k in obj){
-            if (typeof this[k] == "boolean"){ //this[k] == "active" || this[k] == "onsale" || 
+            if (this[k] != undefined && typeof this[k] == "boolean"){ //this[k] == "active" || this[k] == "onsale" || 
                 this[k] = obj[k] == "1" ? true : false;
             }
-            else if (typeof this[k] == "number"){
+            else if (this[k] != undefined && typeof this[k] == "number"){
                 this[k] = Number(obj[k]);
             }           
             else{
