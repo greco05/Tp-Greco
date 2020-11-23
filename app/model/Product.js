@@ -1,10 +1,11 @@
 class Product extends Model{
 
     constructor(obj) {
-        super()
-        assign(obj);
+        super(obj);
+        super.assign(obj);
+        let bp;
+        
     }
-
 
     id = 0;
     active = true;

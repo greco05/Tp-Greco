@@ -1,15 +1,11 @@
 Step 4 :
 
-1. Créer une fonction App.test() qui va nous servir à tester notre code au fur et à mesure
+0. Modifier le classLoader pour les classes qui extends ... // OK
+1. Ajouter les fonctions qui permettent d'interagir avec la base de donnée pour toutes les classes model :
+insert
+update
+delete
+2. Tester tous les cas dans la fonction App.test()
 
-2. Ajouter la classe Category (même principe que Product)
-2bis. Tester la création d'objets Product et Category en js à partir de requêtes sur la DB (Rest)
-
-3. Créer la classe Model qui sera la classe mère de toutes les autres classes du répertoire model
-4. Modifier les classes Product et Category (extends Model)
-4bis. Tester la création d'objets Product et Category en js à partir de requêtes sur la DB (Rest)
-
-5. Créer une fonction App.loadClasses qui charge les classes (afin d'éviter de rajouter une multitude de balises script dans index.html)
-
-6. git Commit Step 4 + Merge sur master
-7. Nouvelle Branche git Step 5 pour la prochaine étape
+3. git Commit Step 5 + Merge sur master
+4. Nouvelle Branche git Step 6 pour la prochaine étape
