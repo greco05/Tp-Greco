@@ -35,7 +35,7 @@ class Model{
         let table = this.constructor.name.toLowerCase();
         let fields = this.toSql();
         return Rest.post(table,fields).done((resp)=>{
-            let id = resp.tryJsonParse();
+            let resp = resp.tryJsonParse();
         })
     }
 
@@ -47,7 +47,7 @@ class Model{
         delete this.id;
         let fields = this.toSql();
         return Rest.put(table,id,params).done((resp)=>{
-            let result = resp.tryJsonParse();
+            let resp = resp.tryJsonParse();
         })
     }
 
@@ -56,8 +56,8 @@ class Model{
         //Q? Que renvoi Rest.delete ?
         let table = this.constructor.name.toLowerCase();
         let id = this.id;
-        return Rest.put(table,id).done((resp)=>{
-            let result = resp.tryJsonParse();
+        return Rest.delete(table,id).done((resp)=>{
+            let resp = resp.tryJsonParse();
         })
         
     }
