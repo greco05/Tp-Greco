@@ -63,10 +63,10 @@ class App {
 
     static test() {
         
-        let product = new Product({});
-        // TODO Step 5
+        let product = new Product({id:200,title:"TEST ABC", price:15});
+        product.insert();
 
-        let category = new Category();
+        let category = new Category({title:"TEST DEF"});
         // TODO Step 5
         
         
