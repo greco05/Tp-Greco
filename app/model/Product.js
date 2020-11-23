@@ -1,8 +1,10 @@
 class Product extends Model{
 
     constructor(obj) {
-        /* TODO */
+        super()
+        assign(obj);
     }
+
 
     id = 0;
     active = true;

@@ -1,7 +1,8 @@
 class Category extends Model {
 
     constructor(obj) {
-        /* TODO */
+        super()
+        assign(obj);
     }
 
     id = 0;
@@ -10,5 +11,5 @@ class Category extends Model {
     description = "";
     onsale = false;
     ord = 0;
-
+    
 }
