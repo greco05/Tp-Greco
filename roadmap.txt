@@ -1,6 +1,6 @@
 Step 4 :
 
-0. Modifier le classLoader pour les classes qui extends ... // OK
+0. Modifier le classLoader pour les classes qui extends ...
 1. Ajouter les fonctions qui permettent d'interagir avec la base de donnée pour toutes les classes model :
 insert
 update

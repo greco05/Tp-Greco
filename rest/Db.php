@@ -7,9 +7,9 @@ class Db
     {
         if (self::$db === null) {
             // Paramètres de configuration DB
-            $dsn = "mysql:host=localhost;port=3308;dbname=db_stepbystep";
-            $user = "7psXVM7xBQAHegj8";
-            $pass = "5ig4Pl1gdGoc37DX";
+            $dsn = "mysql:host=localhost;port=3306;dbname=stepbystep";
+            $user = "root";
+            $pass = "";
 
             try {
                 self::$db = new PDO(

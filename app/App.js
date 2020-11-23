@@ -27,13 +27,11 @@ class App {
     }
 
     static classes = [
-        "Utils", "Rest", "model/Model",
+        "Utils", "Rest", "model/Model"
     ];
-
     static extends = [
         "model/Product", "model/Category"
     ];
-
     static loadClasses() {
         let deferred = $.Deferred();
         let _classes = $.map(App.classes, (cl) => {
@@ -49,6 +47,7 @@ class App {
         });
         return deferred.promise()
     }
+
     static getScript(scriptUrl) {
         let deferred = $.Deferred();
         const script = document.createElement('script');
@@ -63,12 +62,12 @@ class App {
 
     static test() {
         
-        let product = new Product({id:200,title:"TEST ABC", price:15});
-        product.insert();
-
-        let category = new Category({title:"TEST DEF"});
+        let product = new Product();
         // TODO Step 5
-        
+        console.log(product)
+
+        // let category = new Category();
+        // TODO Step 5
         
         $('#main').hide().html("TEST").fadeIn();
     }
