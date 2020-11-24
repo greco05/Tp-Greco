@@ -63,10 +63,15 @@ class App {
 
     static test() {
         
-        let product = new Product({title:"TEST 123", active:true, description:"desc 123", price:12});
+        let product = new Product({title:"TEST 123", active:true ,onsale:false, description:"desc 123", price:12});
         product.insert()
+        
+        // let product = new Product({id:104});
+        // product.delete()
+
 
         // let category = new Category();
+        // console.log(category)
         // TODO Step 5
         
         $('#main').hide().html("TEST").fadeIn();

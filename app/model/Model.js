@@ -5,23 +5,30 @@ class Model {
             if (this[k] != undefined && typeof this[k] == 'number') {
                 this[k] = Number(obj[k])
             }
-            if (this[k] != undefined && typeof this[k] == 'boolean') {//version loic test
-                this[k] = obj[k] == ('1' || true) ? true : false;
+            else if (this[k] != undefined && typeof this[k] == 'boolean') {
+                this[k] = (obj[k] == ("1" || true)) ? true : false;
             }
-            // else if (this[k] != undefined && typeof this[k] == 'boolean') {
-            //     this[k] = (obj[k] == ("1" || true)) ? true : false;
-            // }
             else {
                 this[k] = obj[k]
             }
         }
     }
 
+    convBool(){
+        for(let k in this){
+            if(this[k] != undefined && typeof this[k] == 'boolean'){
+                this[k] = this[k] == true ? "1" : "0";
+            }
+        }
+    }
+
     insert() {
         let table = this.constructor.name.toLowerCase();
-        let fields = this.assign();
+        delete this.id;
+        let fields = this.convBool();
+        console.log(fields)
         return Rest.put(table, fields).done((resp) => {
-            resp = resp.tryJsonParse();
+         resp = resp.tryJsonParse();
         })
     }
 
@@ -49,6 +56,7 @@ class Model {
     }
 
     static select(id) {
-
+        let table = this.constructor.name.toLowerCase()
+        return table[id];
     }
 }
