@@ -32,6 +32,7 @@ class App {
     static extends = [
         "model/Product", "model/Category"
     ];
+
     static loadClasses() {
         let deferred = $.Deferred();
         let _classes = $.map(App.classes, (cl) => {
@@ -62,14 +63,12 @@ class App {
 
     static test() {
         
-        let product = new Product();
-        // TODO Step 5
-        console.log(product)
+        let product = new Product({title:"TEST 123", active:true, description:"desc 123", price:12});
+        product.insert()
 
         // let category = new Category();
         // TODO Step 5
         
         $('#main').hide().html("TEST").fadeIn();
     }
-
 }
