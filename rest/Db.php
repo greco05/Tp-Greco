@@ -7,9 +7,9 @@ class Db
     {
         if (self::$db === null) {
             // Paramètres de configuration DB
-            $dsn = "mysql:host=localhost;port=3306;dbname=stepbystep";
-            $user = "root";
-            $pass = "";
+            $dsn = "mysql:host=localhost;port=3308;dbname=db_stepbystep";
+            $user = "7psXVM7xBQAHegj8";
+            $pass = "5ig4Pl1gdGoc37DX";
 
             try {
                 self::$db = new PDO(
@@ -62,7 +62,7 @@ class Db
         $sql = "SELECT * FROM $table WHERE $where ORDER BY $orderby";
         $resp = self::query($sql, $params);
         $rows = Db::$stmt->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($rows);
+        return $rows;
     }
 
     public static function insert($table, $fields)
@@ -87,7 +87,7 @@ class Db
         if ($resp) {
             $resp = self::$db->lastInsertId();
         }
-        return json_encode($resp);
+        return $resp;
     }
 
     public static function update($table, $id, $fields)
@@ -107,7 +107,7 @@ class Db
         $sql = "UPDATE $table SET $set WHERE $where";
         $resp = self::query($sql, $valuesArray);
         $resp = $resp && Db::$stmt->rowCount() == 1;
-        return json_encode($resp);
+        return $resp;
     }
 
     public static function delete($table, $id)
@@ -118,6 +118,6 @@ class Db
         $sql = "DELETE FROM $table WHERE $where";
         $resp = self::query($sql, $valuesArray);
         $resp = $resp && Db::$stmt->rowCount() == 1;
-        return json_encode($resp);
+        return $resp;
     }
 }

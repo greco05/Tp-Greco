@@ -15,10 +15,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         $where = isset($_get['where']) ? $_get['where'] : null;
         $orderby = isset($_get['orderby']) ? $_get['orderby'] : null;
         //echo json_encode($_get);
-        echo Db::select($table, $id, $where, $orderby);
+        echo json_encode(Db::select($table, $id, $where, $orderby));
         break;
     case 'POST':
-        // $_post = validate_request($_POST);
+        //$_post = validate_request($_POST);
         $_post = json_decode(file_get_contents('php://input'), true);
         $_post = validate_request($_post);
         $table = isset($_post['table']) ? $_post['table'] : null;
@@ -29,7 +29,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         }
         $fields = isset($_post['fields']) ? $_post['fields'] : null;
         //echo json_encode($_post);
-        echo Db::insert($table, $fields);
+        echo json_encode(Db::insert($table, $fields));
         break;
     case 'PUT':
         $_put = json_decode(file_get_contents('php://input'), true);
@@ -43,7 +43,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         }
         $fields = isset($_put['fields']) ? $_put['fields'] : null;
         //echo json_encode($_put);
-        echo Db::update($table, $id, $fields);
+        echo json_encode(Db::update($table, $id, $fields));
         break;
     case 'DELETE':
         $_del = json_decode(file_get_contents('php://input'), true);
@@ -56,7 +56,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             break;
         }
         //echo json_encode($_del);
-        echo Db::delete($table, $id);
+        echo json_encode(Db::delete($table, $id));
         break;
 }
 

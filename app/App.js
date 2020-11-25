@@ -21,18 +21,32 @@ class App {
 
     static browse() {
         console.clear();
+
         let hash = (window.location.hash || "#accueil").substring(1);
-        App.test();
-        //$('#main').hide().html(hash).fadeIn();
+        //Router
+        let hashParts = hash.split('/')
+        let route = hashParts[0];
+        let id = hashParts[1];
+        //TODO Methode 1 avec php
+        $.post("app/router/", {route, id}).done((resp)=>{
+            //resp contiendra la view et les models au format json qu'il faudra par la suite convertir
+            $('#main').hide().html(view).fadeIn('fast');
+        })
+        //TODO Methode 2 avec js
+        Router.start(route, id).done(view => {
+            //le router js renvoi juste la vue, les models sont déjà remplis
+            $('#main').hide().html(view).fadeIn('fast');
+        })
+        console.log()
+        
     }
 
     static classes = [
-        "Utils", "Rest", "model/Model"
+        "Utils", "Rest", "model/Model", "router/Router"
     ];
     static extends = [
         "model/Product", "model/Category"
     ];
-
     static loadClasses() {
         let deferred = $.Deferred();
         let _classes = $.map(App.classes, (cl) => {
@@ -48,7 +62,6 @@ class App {
         });
         return deferred.promise()
     }
-
     static getScript(scriptUrl) {
         let deferred = $.Deferred();
         const script = document.createElement('script');
@@ -63,35 +76,6 @@ class App {
 
     static test() {
         
-        // let product = new Product();
-        // product.insert().done((resp) =>{
-        //     console.log(resp)
-        //     product.title = "TEST"
-        //     product.update().done((resp)=>{
-        //         console.log(resp)
-        //     })
-        // }).fail((resp) =>{
-        //     console.log(resp)
-        // })
-        
-        // let product = new Product({id:101});
-        // product.delete().done((resp) => {
-        //     console.log(resp);
-        // }).fail((resp) => {
-        //     console.log(resp)
-        // })
-
-
-        // let category = new Category();
-        // console.log(category)
-        // TODO Step 5
-
-        Product.select({where:"active=true",}).done((resp) => {
-            console.log(resp);
-        }).fail((resp)=> {
-            console.log(resp);
-        })
-        
-        $('#main').hide().html("TEST").fadeIn();
     }
+
 }

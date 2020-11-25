@@ -1,23 +1,15 @@
-class Model {
+class Model{
 
-    assign(obj) {
-        for (let k in obj) {
-            if (this[k] != undefined && typeof this[k] == 'number') {
+    assign(obj){
+        for(let k in obj){
+            if(this[k] != undefined && typeof this[k] == 'number'){
                 this[k] = Number(obj[k])
             }
-            else if (this[k] != undefined && typeof this[k] == 'boolean') {
+            else if(this[k] != undefined && typeof this[k] == 'boolean'){
                 this[k] = (obj[k] == ("1" || true)) ? true : false;
             }
-            else {
+            else{
                 this[k] = obj[k]
-            }
-        }
-    }
-
-    convBool(){
-        for(let k in this){
-            if(this[k] != undefined && typeof this[k] == 'boolean'){
-                this[k] = this[k] == true ? "1" : "0";
             }
         }
     }
@@ -45,69 +37,86 @@ class Model {
         return deferred.promise();
     }
 
-    update() {
+    update(){// TODO Faire un update seulement si une des propriétés de l'objet courant a changé
+        //Q? Quels sont les paramètres attendus par Rest.put ?
         let table = this.constructor.name.toLowerCase();
         let id = this.id;
         let fields = this;
         let deferred = $.Deferred();
-        Rest.put({table, id, fields}).done((resp) => {
-            let json = resp.tryJsonParse()
+        Rest.put({table, id, fields}).done((resp)=>{
+            //Q? Que renvoi Rest.put ?
+            let json = resp.tryJsonParse();
             if(json){
-                deferred.resolve(resp);
+                deferred.resolve(json)
             }
             else{
-                deferred.reject(resp);
+                //TODO Afficher un message à l'utilisateur
+                deferred.reject(resp)
             }
-        }).fail((resp) => {
-            deferred.reject(resp);
+        }).fail((resp)=>{
+            //TODO Afficher un message à l'utilisateur
+            deferred.reject(resp)
         })
         return deferred.promise();
-        
     }
 
-    delete() {
+    delete(){
+        //Q? Quels sont les paramètres attendus par Rest.delete ?
         let table = this.constructor.name.toLowerCase();
         let id = this.id;
         let deferred = $.Deferred();
-        Rest.delete({id, table}).done((resp) => {
-            let json = resp.tryJsonParse()
+        Rest.delete({table, id}).done((resp)=>{
+            //Q? Que renvoi Rest.delete ?
+            let json = resp.tryJsonParse();
             if(json){
-                deferred.resolve(resp)
+                deferred.resolve(json)
             }
             else{
-                deferred.reject()
+                //TODO Afficher un message à l'utilisateur
+                deferred.reject(resp)
             }
-        }).fail((resp)=> {
+        }).fail((resp)=>{
+            //TODO Afficher un message à l'utilisateur
             deferred.reject(resp)
         })
-        return deferred.promise()
-
-
+        return deferred.promise();
     }
 
-    static select(params = {}) {
-        let classe = this;
-        let table = classe.name.toLowerCase()
-        params.table = table
-        classe.list = [];
+    static list = [];
+    static get selected(){
+        let classe = this.prototype.constructor;//this
+        return classe.list.length == 1 ? classe.list[0] : undefined;
+    }
+    static select(params = {}){
+        //Q? Quels sont les paramètres attendus par Rest.get ?
+        let table = this.prototype.constructor.name.toLowerCase();//this.name
+        params.table = table;
+        // let id = params.id
+        // let where = params.where
+        // let orderby = params.orderby
         let deferred = $.Deferred();
-        Rest.get(params).done((resp) => {
-            let json = resp.tryJsonParse()
+        let classe = this.prototype.constructor;//this
+        classe.list = [];
+        Rest.get(params).done((resp)=>{
+            //Q? Que renvoi Rest.get ?
+            let json = resp.tryJsonParse();
             if(json){
                 for(let item of json){
                     let current = new classe(item)
                     classe.list.push(current)
                 }
-            deferred.resolve(classe.list)
+                deferred.resolve(classe.list)
             }
             else{
-                deferred.reject(resp);
+                //TODO Afficher un message à l'utilisateur
+                deferred.reject(resp)
             }
-        }).fail((resp) => {
-            deferred.reject(resp);
+        }).fail((resp)=>{
+            //TODO Afficher un message à l'utilisateur
+            deferred.reject(resp)
         })
         return deferred.promise();
-        
-        
     }
+    
+
 }
