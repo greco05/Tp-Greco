@@ -12,13 +12,16 @@ class Utils{
         }
 
         String.prototype.capitalize = function () {//TODO
-            //première lettre en majuscule
-            return //...
+            return this.charAt(0).toUpperCase() + this.slice(1)
         }
         
         String.prototype.tryEval = function (context) {//TODO
             let value;
-            //evaluation d'une chaine avec eval
+            try {
+                value = eval(context);
+            } catch {
+                console.log("tryEval Error", this);
+            }
             return value;
         }
 

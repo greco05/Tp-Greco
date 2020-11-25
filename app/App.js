@@ -27,11 +27,11 @@ class App {
         let hashParts = hash.split('/')
         let route = hashParts[0];
         let id = hashParts[1];
-        //TODO Methode 1 avec php
-        $.post("app/router/", {route, id}).done((resp)=>{
-            //resp contiendra la view et les models au format json qu'il faudra par la suite convertir
-            $('#main').hide().html(view).fadeIn('fast');
-        })
+        // //TODO Methode 1 avec php
+        // $.post("app/router/", {route, id}).done((resp)=>{
+        //     //resp contiendra la view et les models au format json qu'il faudra par la suite convertir
+        //     $('#main').hide().html(view).fadeIn('fast');
+        // })
         //TODO Methode 2 avec js
         Router.start(route, id).done(view => {
             //le router js renvoi juste la vue, les models sont déjà remplis
