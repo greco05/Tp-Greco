@@ -63,16 +63,34 @@ class App {
 
     static test() {
         
-        let product = new Product({title:"TEST 123", active:true ,onsale:false, description:"desc 123", price:12});
-        product.insert()
+        // let product = new Product();
+        // product.insert().done((resp) =>{
+        //     console.log(resp)
+        //     product.title = "TEST"
+        //     product.update().done((resp)=>{
+        //         console.log(resp)
+        //     })
+        // }).fail((resp) =>{
+        //     console.log(resp)
+        // })
         
-        // let product = new Product({id:104});
-        // product.delete()
+        // let product = new Product({id:101});
+        // product.delete().done((resp) => {
+        //     console.log(resp);
+        // }).fail((resp) => {
+        //     console.log(resp)
+        // })
 
 
         // let category = new Category();
         // console.log(category)
         // TODO Step 5
+
+        Product.select({where:"active=true",}).done((resp) => {
+            console.log(resp);
+        }).fail((resp)=> {
+            console.log(resp);
+        })
         
         $('#main').hide().html("TEST").fadeIn();
     }

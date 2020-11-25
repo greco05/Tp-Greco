@@ -22,41 +22,92 @@ class Model {
         }
     }
 
-    insert() {
+    insert(){
+        //Q? Quels sont les paramètres attendus par Rest.post ?
         let table = this.constructor.name.toLowerCase();
-        delete this.id;
-        let fields = this.convBool();
-        console.log(fields)
-        return Rest.put(table, fields).done((resp) => {
-         resp = resp.tryJsonParse();
+        let fields = this;
+        let deferred = $.Deferred();
+        Rest.post({table,fields}).done((resp)=>{
+            //Q? Que renvoi Rest.post ?
+            let json = resp.tryJsonParse();
+            if(json){//isNumber
+                fields.assign({id:json});//Attention à this !
+                deferred.resolve(fields.id)
+            }
+            else{
+                //TODO Afficher un message à l'utilisateur
+                deferred.reject(resp)
+            }
+        }).fail((resp)=>{
+            //TODO Afficher un message à l'utilisateur
+            deferred.reject(resp)
         })
+        return deferred.promise();
     }
 
-    update() {// TODO (plus tard) Faire un update seulement si une des propriétés de l'objet courant a changé
-        //Q? Quels sont les paramètres attendus par Rest.put ?
-        //Q? Que renvoi Rest.put ?
+    update() {
         let table = this.constructor.name.toLowerCase();
         let id = this.id;
-        delete this.id;
-        let fields = this.assign();
-        return Rest.put(table, id, fields).done((resp) => {
-            resp = resp.tryJsonParse();
+        let fields = this;
+        let deferred = $.Deferred();
+        Rest.put({table, id, fields}).done((resp) => {
+            let json = resp.tryJsonParse()
+            if(json){
+                deferred.resolve(resp);
+            }
+            else{
+                deferred.reject(resp);
+            }
+        }).fail((resp) => {
+            deferred.reject(resp);
         })
+        return deferred.promise();
+        
     }
 
     delete() {
-        //Q? Quels sont les paramètres attendus par Rest.delete ?
-        //Q? Que renvoi Rest.delete ? 
         let table = this.constructor.name.toLowerCase();
         let id = this.id;
-        return Rest.delete(table, id).done((resp) => {
-            resp = resp.tryJsonParse();
+        let deferred = $.Deferred();
+        Rest.delete({id, table}).done((resp) => {
+            let json = resp.tryJsonParse()
+            if(json){
+                deferred.resolve(resp)
+            }
+            else{
+                deferred.reject()
+            }
+        }).fail((resp)=> {
+            deferred.reject(resp)
         })
+        return deferred.promise()
+
 
     }
 
-    static select(id) {
-        let table = this.constructor.name.toLowerCase()
-        return table[id];
+    static select(params = {}) {
+        let classe = this;
+        let table = classe.name.toLowerCase()
+        params.table = table
+        classe.list = [];
+        let deferred = $.Deferred();
+        Rest.get(params).done((resp) => {
+            let json = resp.tryJsonParse()
+            if(json){
+                for(let item of json){
+                    let current = new classe(item)
+                    classe.list.push(current)
+                }
+            deferred.resolve(classe.list)
+            }
+            else{
+                deferred.reject(resp);
+            }
+        }).fail((resp) => {
+            deferred.reject(resp);
+        })
+        return deferred.promise();
+        
+        
     }
 }
