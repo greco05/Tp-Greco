@@ -59,6 +59,7 @@ class Router {
         let view; // products, categories
         //TODO Requete pour récuperer la vue
         requests.push($.get('app/view/' + page + '.html').done((resp) => {
+            console.log(resp)
             view = $(resp);
         }))
         //TODO Requete pour les données (utiliser select)
@@ -68,7 +69,7 @@ class Router {
             console.log(item)
             let classe = item.table.getClasse();
             requests.push(classe.select(item))
-            
+
             // if (item.table == "product") {
                 
             //     requests.push(Product.select(data[item]).done((resp) => {
