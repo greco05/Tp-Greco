@@ -117,6 +117,15 @@ class Model{
         })
         return deferred.promise();
     }
+
+    static getOne(id){
+        let classe = this
+        return classe.list.filter(row => row.id == id)[0]
+    }
+    static getAll(){
+        let classe = this
+        return classe.list
+    }
     
 
 }
