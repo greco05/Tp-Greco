@@ -1,13 +1,17 @@
-Step 3 :
+Step 7 -> Objectif : créer un router
 
-0. Extension TODO Tree bien pratique !
-Lors d'un update (put) avec aucune valeur modifiée dans la ligne, l'Api Rest renvoi false (à traiter ultérieurement en JS)
+1. Modification du menu sur index.html (liens vers differentes vues)
+2. Création des view html (accueil, product, products, category, categories et 404)
 
-1. Création de la classe Utils qui va nous permettre de stocker des fonctions outils 
-String > tryJsonParse() pour convertir les reponses serveur en objet json
+3. Methode 1 : création d'un routeur php (app/router/index.php) et modification de App.browse
+Attention, il faut modifier l'API Rest
+- les fonctions Db.select, Db.insert, Db.update et Db.delete ne renvoient plus de json
+- la convertion en json se fera sur l'index.php
+3bis. Tests
 
-2. Création d'une classe Product et convertion json en js Product
-Attention au type des données récupérées (string/number/bool)
+4. Methode 2 : création d'un routeur js (app/router/router.js) et modification de App.browse
+Attention, il faut ajouter des fonctions dans la classe Utils : capitalize, tryEval, getClasse
+4bis. Tests
 
-3. git Commit Step 3 + Merge sur master
-4. Nouvelle Branche git Step 4 pour la prochaine étape
+5. git Commit Step 7 + Merge sur master
+6. Nouvelle Branche git Step 8 pour la prochaine étape
