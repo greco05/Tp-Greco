@@ -16,4 +16,7 @@ class Product extends Model{
     onsale = false;
     ord = 0;
 
+    get category() {
+        return Category.getOne(this.category_id)
+    }
 }

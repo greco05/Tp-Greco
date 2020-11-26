@@ -1,77 +1,85 @@
-class Router{
+class Router {
 
-    static start(route, id){
+    static start(route, id) {
         let page = "404";
         let data = []; //Pour stocker les objets necessaires aux select
         switch (route) {
             case "accueil":
+                page = "accueil"
                 break;
-            
+
             case "product":
-            
-            data.push({
-                table:"product",
-                id,
-            })
-            data.push({
-                table:"category"
-            })
+                page = id ? "product/" + id : "products";
+                data.push({
+                    table: "product",
+                    id,
+                })
+                data.push({
+                    table: "category"
+                })
                 break;
 
             case "category":
-
-            data.push({
-                table:"category",
-                id,
-            })
-            data.push({
-                table:"product"
-            })
+                page = id ? "category/" + id : "categories";
+                data.push({
+                    table: "category",
+                    id,
+                })
+                data.push({
+                    table: "product"
+                })
                 break;
-            
+
             case "products":
-            
-            data.push({
-                table:"product",
-                id,
-            })
-            data.push({
-                table:"category"
-            })
+                page = id ? "product" : "products";
+                data.push({
+                    table: "product",
+                    id,
+                })
+                data.push({
+                    table: "category"
+                })
                 break;
 
-            case "categorys":
-
-            data.push({
-                table:"category",
-                id,
-            })
-            data.push({
-                table:"product"
-            })
+            case "categories":
+                page = id ? "category" : "categories";
+                data.push({
+                    table: "category",
+                    id,
+                })
+                data.push({
+                    table: "product"
+                })
                 break;
-                }
+        }
         let requests = []
         let deferred = $.Deferred();
         let view;
         //TODO Requete pour récuperer la vue
-        requests.push($.get('app/view/' + view +'.html').done((view) => {
+        requests.push($.get('app/view/' + page + '.html').done((view) => {
             console.log(view)
         }))
         //TODO Requete pour les données (utiliser select)
-        for(let item in data){
-            console.log(data[item].table)
-            let test = new Product(data[item])
-            console.log(test)
-            // requests.push(Product.select(test).done((resp) =>{
-            //     console.log("coucou")
-            // }))
+        for (let item of data) {
+            if (item.table == "product") {
+                requests.push(Product.select(data[item]).done((resp) => {
+                    console.log("Classe product OK : " + resp)
+                }))
+            }
+            if (item.table == "category") {
+
+                requests.push(Category.select(data[item]).done((resp) => {
+                    console.log("Classe category OK : " + resp)
+                }))
+            }
         }
+
         //Synchronisation //3requests
-        $.when.apply($, requests).then(()=>{
+        $.when.apply($, requests).then(() => {
             deferred.resolve(view)
         })
         return deferred.promise();
-    }
 
+
+    }
 }

@@ -1,6 +1,6 @@
-class Utils{
+class Utils {
 
-    static init(){
+    static init() {
         String.prototype.tryJsonParse = function () {
             let value;
             try {
@@ -14,7 +14,7 @@ class Utils{
         String.prototype.capitalize = function () {//TODO
             return this.charAt(0).toUpperCase() + this.slice(1)
         }
-        
+
         String.prototype.tryEval = function (context) {//TODO
             let value;
             try {
@@ -29,5 +29,4 @@ class Utils{
             return this.capitalize().tryEval();
         }
     }
-
 }
